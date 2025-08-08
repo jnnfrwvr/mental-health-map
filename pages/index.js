@@ -1,30 +1,13 @@
 import React, { useState } from "react";
-import dynamic from "next/dynamic";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
-const USAMap = dynamic(() => import("react-usa-map"), { ssr: false });
+const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 export default function Home() {
   const [selectedState, setSelectedState] = useState(null);
   const [response, setResponse] = useState(null);
 
-  const stateNames = {
-    AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California",
-    CO: "Colorado", CT: "Connecticut", DE: "Delaware", FL: "Florida", GA: "Georgia",
-    HI: "Hawaii", ID: "Idaho", IL: "Illinois", IN: "Indiana", IA: "Iowa", KS: "Kansas",
-    KY: "Kentucky", LA: "Louisiana", ME: "Maine", MD: "Maryland", MA: "Massachusetts",
-    MI: "Michigan", MN: "Minnesota", MS: "Mississippi", MO: "Missouri", MT: "Montana",
-    NE: "Nebraska", NV: "Nevada", NH: "New Hampshire", NJ: "New Jersey", NM: "New Mexico",
-    NY: "New York", NC: "North Carolina", ND: "North Dakota", OH: "Ohio", OK: "Oklahoma",
-    OR: "Oregon", PA: "Pennsylvania", RI: "Rhode Island", SC: "South Carolina", SD: "South Dakota",
-    TN: "Tennessee", TX: "Texas", UT: "Utah", VT: "Vermont", VA: "Virginia", WA: "Washington",
-    WV: "West Virginia", WI: "Wisconsin", WY: "Wyoming"
-  };
-
-  const mapHandler = async (event) => {
-    const stateAbbrev = event.target.dataset.name;
-    const stateName = stateNames[stateAbbrev];
-    if (!stateName) return;
-
+  const fetchResources = async (stateName) => {
     setSelectedState(stateName);
     setResponse("Loading...");
 
@@ -42,7 +25,24 @@ export default function Home() {
     <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Click a State for Mental Health Resources</h1>
       <div style={{ maxWidth: "800px", margin: "2rem auto" }}>
-        <USAMap onClick={mapHandler} />
+        <ComposableMap projection="geoAlbersUsa">
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  onClick={() => fetchResources(geo.properties.name)}
+                  style={{
+                    default: { fill: "#DDD", outline: "none" },
+                    hover: { fill: "#999", outline: "none", cursor: "pointer" },
+                    pressed: { fill: "#555", outline: "none" }
+                  }}
+                />
+              ))
+            }
+          </Geographies>
+        </ComposableMap>
       </div>
       {selectedState && (
         <div style={{ background: "#f0f0f0", padding: "1rem", borderRadius: "8px" }}>

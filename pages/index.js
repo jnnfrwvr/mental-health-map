@@ -24,7 +24,7 @@ export default function Home() {
         padding: "1rem",
         fontFamily: "sans-serif",
         maxWidth: "1200px",
-        margin: "0 auto"
+        margin: "0"
       }}
     >
       <h1
@@ -37,7 +37,7 @@ export default function Home() {
         Find Verified Mental Health Resources by State
       </h1>
 
-      <div style={{ maxWidth: "800px", margin: "2rem auto" }}>
+      <div style={{ maxWidth: "100%", margin: "1rem 0" }}>
         <ComposableMap projection="geoAlbersUsa">
           <Geographies geography={geoUrl}>
             {({ geographies }) =>

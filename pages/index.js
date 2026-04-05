@@ -13,10 +13,7 @@ export default function Home() {
 
     const stateResources = resources[stateName];
 
-    if (!stateResources) {
-      setResponse("We do not have verified resources for this state yet.");
-      return;
-    }
+    setResponse("We’re actively expanding verified resources. Please check back soon or use 988 for immediate support.");
 
     setResponse(stateResources);
   };

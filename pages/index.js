@@ -21,9 +21,9 @@ export default function Home() {
   return (
     <main
       style={{
-        padding: "2rem",
+        padding: "1rem",
         fontFamily: "sans-serif",
-        maxWidth: "1000px",
+        maxWidth: "1200px",
         margin: "0 auto"
       }}
     >

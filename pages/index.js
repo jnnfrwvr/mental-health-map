@@ -9,21 +9,34 @@ export default function Home() {
   const [response, setResponse] = useState("");
 
   const fetchResources = (stateName) => {
-  setSelectedState(stateName);
+    setSelectedState(stateName);
 
-  const stateResources = resources[stateName];
+    const stateResources = resources[stateName];
 
-  if (!stateResources) {
-    setResponse("We do not have verified resources for this state yet.");
-    return;
-  }
+    if (!stateResources) {
+      setResponse("We do not have verified resources for this state yet.");
+      return;
+    }
 
-  setResponse(stateResources);
-};
+    setResponse(stateResources);
+  };
 
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif", maxWidth: "1000px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "2rem", fontWeight: "bold", textAlign: "center" }}>
+    <main
+      style={{
+        padding: "2rem",
+        fontFamily: "sans-serif",
+        maxWidth: "1000px",
+        margin: "0 auto"
+      }}
+    >
+      <h1
+        style={{
+          fontSize: "2rem",
+          fontWeight: "bold",
+          textAlign: "center"
+        }}
+      >
         Click a State for Mental Health Resources
       </h1>
 
@@ -38,7 +51,11 @@ export default function Home() {
                   onClick={() => fetchResources(geo.properties.name)}
                   style={{
                     default: { fill: "#D9D9D9", outline: "none" },
-                    hover: { fill: "#A6A6A6", outline: "none", cursor: "pointer" },
+                    hover: {
+                      fill: "#A6A6A6",
+                      outline: "none",
+                      cursor: "pointer"
+                    },
                     pressed: { fill: "#737373", outline: "none" }
                   }}
                 />
@@ -49,11 +66,43 @@ export default function Home() {
       </div>
 
       {selectedState && (
-        <div style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "8px", marginTop: "1rem" }}>
+        <div
+          style={{
+            background: "#f5f5f5",
+            padding: "1rem",
+            borderRadius: "8px",
+            marginTop: "1rem"
+          }}
+        >
           <h2 style={{ marginTop: 0 }}>Resources for {selectedState}</h2>
-          <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0 }}>
-            {response}
-          </pre>
+
+          {typeof response === "string" ? (
+            <p>{response}</p>
+          ) : (
+            <div>
+              <p>
+                <strong>Crisis Support:</strong>{" "}
+                <a href={response.crisisUrl} target="_blank" rel="noreferrer">
+                  {response.crisisLine}
+                </a>
+              </p>
+
+              <ul style={{ paddingLeft: "1.25rem" }}>
+                {response.resources.map((item, index) => (
+                  <li key={index} style={{ marginBottom: "1rem" }}>
+                    <strong>{item.name}</strong>
+                    <br />
+                    Phone: {item.phone}
+                    <br />
+                    Website:{" "}
+                    <a href={item.url} target="_blank" rel="noreferrer">
+                      {item.url}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
     </main>

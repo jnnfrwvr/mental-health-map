@@ -245,7 +245,93 @@ const resources = {
         url: "https://wa211.org/"
       }
     ]
-  }
+  },
+Idaho: {
+  crisisLine: "Call or text 988",
+  crisisUrl: "https://988lifeline.org/",
+  resources: [
+    {
+      name: "Idaho Department of Health and Welfare Behavioral Health",
+      phone: "(208) 334-6997",
+      url: "https://healthandwelfare.idaho.gov/services-programs/behavioral-health"
+    },
+    {
+      name: "Idaho Crisis & Suicide Hotline",
+      phone: "988",
+      url: "https://988lifeline.org/"
+    },
+    {
+      name: "211 Idaho CareLine",
+      phone: "211",
+      url: "https://211.idaho.gov/"
+    }
+  ]
+},
+
+Montana: {
+  crisisLine: "Call or text 988",
+  crisisUrl: "https://988lifeline.org/",
+  resources: [
+    {
+      name: "Montana Department of Public Health and Human Services Behavioral Health",
+      phone: "(406) 444-3964",
+      url: "https://dphhs.mt.gov/"
+    },
+    {
+      name: "Montana 988 Suicide and Crisis Lifeline",
+      phone: "988",
+      url: "https://dphhs.mt.gov/suicideprevention/988"
+    },
+    {
+      name: "Montana 211",
+      phone: "211",
+      url: "https://montana211.org/"
+    }
+  ]
+},
+
+Wyoming: {
+  crisisLine: "Call or text 988",
+  crisisUrl: "https://988lifeline.org/",
+  resources: [
+    {
+      name: "Wyoming Department of Health Behavioral Health Division",
+      phone: "(307) 777-6494",
+      url: "https://health.wyo.gov/"
+    },
+    {
+      name: "Wyoming 988 Crisis Lifeline",
+      phone: "988",
+      url: "https://health.wyo.gov/behavioralhealth/mhsa/988-crisis-line/"
+    },
+    {
+      name: "Wyoming 211",
+      phone: "211",
+      url: "https://wyoming211.org/"
+    }
+  ]
+},
+
+Oregon: {
+  crisisLine: "Call or text 988",
+  crisisUrl: "https://988lifeline.org/",
+  resources: [
+    {
+      name: "Oregon Health Authority Behavioral Health",
+      phone: "(503) 945-5763",
+      url: "https://www.oregon.gov/oha"
+    },
+    {
+      name: "Lines for Life (Oregon Crisis Support)",
+      phone: "988 or (800) 273-8255",
+      url: "https://www.linesforlife.org/"
+    },
+    {
+      name: "211info Oregon",
+      phone: "211",
+      url: "https://www.211info.org/"
+    }
+  ]
 };
 
 export default resources;

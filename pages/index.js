@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import resources from "../data/resources";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
@@ -7,26 +8,18 @@ export default function Home() {
   const [selectedState, setSelectedState] = useState(null);
   const [response, setResponse] = useState("");
 
-  const fetchResources = async (stateName) => {
-    setSelectedState(stateName);
-    setResponse("Loading...");
+  const fetchResources = (stateName) => {
+  setSelectedState(stateName);
 
-    try {
-      const res = await fetch("/api/gpt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: `What suicide prevention and mental health resources are available in ${stateName}? Include 988 and well-known statewide or national resources. Do not invent organizations.`
-        })
-      });
+  const stateResources = resources[stateName];
 
-      const data = await res.json();
-      setResponse(data.reply || "No response received.");
-    } catch (error) {
-      console.error("Error fetching resources:", error);
-      setResponse("Sorry, something went wrong while loading resources.");
-    }
-  };
+  if (!stateResources) {
+    setResponse("We do not have verified resources for this state yet.");
+    return;
+  }
+
+  setResponse(stateResources);
+};
 
   return (
     <main style={{ padding: "2rem", fontFamily: "sans-serif", maxWidth: "1000px", margin: "0 auto" }}>

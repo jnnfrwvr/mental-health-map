@@ -13,7 +13,12 @@ export default function Home() {
 
     const stateResources = resources[stateName];
 
-    setResponse("We’re actively expanding verified resources. Please check back soon or use 988 for immediate support.");
+    if (!stateResources) {
+      setResponse(
+        "We’re actively expanding verified resources. Please check back soon or use 988 for immediate support."
+      );
+      return;
+    }
 
     setResponse(stateResources);
   };
@@ -63,44 +68,51 @@ export default function Home() {
       </div>
 
       {selectedState && (
-  <div
-    style={{
-      background: "#f5f5f5",
-      padding: "1rem",
-      borderRadius: "8px",
-      marginTop: "1rem"
-    }}
-  >
-    <h2 style={{ marginTop: 0 }}>Resources for {selectedState}</h2>
+        <div
+          style={{
+            background: "#f5f5f5",
+            padding: "1rem",
+            borderRadius: "8px",
+            marginTop: "1rem"
+          }}
+        >
+          <h2 style={{ marginTop: 0 }}>Resources for {selectedState}</h2>
 
-    {!response ? (
-      <p>Loading resources...</p>
-    ) : typeof response === "string" || !response.resources ? (
-      <p>{typeof response === "string" ? response : "We’re actively expanding verified resources. Please check back soon or use 988 for immediate support."}</p>
-    ) : (
-      <div>
-        <p>
-          <strong>Crisis Support:</strong>{" "}
-          <a href={response.crisisUrl} target="_blank" rel="noreferrer">
-            {response.crisisLine}
-          </a>
-        </p>
+          {!response ? (
+            <p>Loading resources...</p>
+          ) : typeof response === "string" || !response.resources ? (
+            <p>
+              {typeof response === "string"
+                ? response
+                : "We’re actively expanding verified resources. Please check back soon or use 988 for immediate support."}
+            </p>
+          ) : (
+            <div>
+              <p>
+                <strong>Crisis Support:</strong>{" "}
+                <a href={response.crisisUrl} target="_blank" rel="noreferrer">
+                  {response.crisisLine}
+                </a>
+              </p>
 
-        <ul style={{ paddingLeft: "1.25rem" }}>
-          {response.resources.map((item, index) => (
-            <li key={index} style={{ marginBottom: "1rem" }}>
-              <strong>{item.name}</strong>
-              <br />
-              Phone: {item.phone}
-              <br />
-              Website:{" "}
-              <a href={item.url} target="_blank" rel="noreferrer">
-                {item.url}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-  </div>
-)}
+              <ul style={{ paddingLeft: "1.25rem" }}>
+                {response.resources.map((item, index) => (
+                  <li key={index} style={{ marginBottom: "1rem" }}>
+                    <strong>{item.name}</strong>
+                    <br />
+                    Phone: {item.phone}
+                    <br />
+                    Website:{" "}
+                    <a href={item.url} target="_blank" rel="noreferrer">
+                      {item.url}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+    </main>
+  );
+}

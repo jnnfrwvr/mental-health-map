@@ -29,12 +29,12 @@ export default function Home() {
     >
       <h1
         style={{
-          fontSize: "2rem",
+          fontSize: "1.75rem",
           fontWeight: "bold",
           textAlign: "center"
         }}
       >
-        Click a State for Mental Health Resources
+        Find Verified Mental Health Resources by State
       </h1>
 
       <div style={{ maxWidth: "800px", margin: "2rem auto" }}>
